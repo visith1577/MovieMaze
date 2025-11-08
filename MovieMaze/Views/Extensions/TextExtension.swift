@@ -7,12 +7,15 @@
 
 import SwiftUI
 
-struct GhostButtonExtension: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+extension Text {
+    func ghostButton() -> some View {
+        self
+            .frame(width: 100, height: 50)
+            .foregroundStyle(.buttonText)
+            .bold()
+            .background {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(.buttonBorder, lineWidth: 5)
+            }
     }
-}
-
-#Preview {
-    GhostButtonExtension()
 }

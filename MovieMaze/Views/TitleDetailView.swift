@@ -8,11 +8,35 @@
 import SwiftUI
 
 struct TitleDetailView: View {
+    
+    var title: Title
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geo in
+            ScrollView {
+                LazyVStack(alignment: .leading) {
+                    AsyncImage(url: title.posterUrl) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: geo.size.width, height: geo.size.height * 0.85)
+                    
+                    Text((title.name ?? title.title) ?? "")
+                        .bold()
+                        .font(.title2)
+                        .padding(5)
+                    
+                    Text(title.overview ?? "")
+                        .padding(5)
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    TitleDetailView()
+    TitleDetailView(title: Title.previewTitles[0])
 }
